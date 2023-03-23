@@ -7,17 +7,28 @@ let start = false
 let gameOver = false
 
 let block_ai = {
-    x : (WIDTH / 2) - (WIDTH / 4),
+    x : (WIDTH / 2) - (WIDTH / 5),
     y : (HEIGHT - 100),
     width: 50,
-    height: 50
+    height: 100
 }
 
 let user = {
-    x : (WIDTH / 2) + (WIDTH / 4),
+    x : (WIDTH / 2) + (WIDTH / 10),
     y : (HEIGHT - 100),
     width: 50,
-    height: 50
+    height: 100
+}
+
+
+
+var img, bg, hero, go, finish;
+function preload() {
+    img = loadImage('images/car1.png')
+    bg  = loadImage('images/bg.png')
+    go  = loadImage('images/go.avif')
+    hero = loadImage('images/car2.png')
+    finish = loadImage('images/finish.jpg')
 }
 
 function setup() {
@@ -34,21 +45,22 @@ function draw() {
 }
 
 function gameWindow() {
-    background('black')
+    image(bg, 0, 0, WIDTH, HEIGHT)
 
     stroke('black')
     textSize(32);
     fill(0, 102, 153)
-    text('F I N I S H   L I N E', ((WIDTH / 2) - 100), 55);
+    //text('F I N I S H   L I N E', ((WIDTH / 2) - 100), 55);
 
     stroke('white')
-    line(0, 90, WIDTH, 90)
+    image(finish,0, 5, WIDTH, 50)
 
     fill('green')
-    rect(block_ai.x, block_ai.y, block_ai.width, block_ai.height)
+    //rect(block_ai.x, block_ai.y, block_ai.width, block_ai.height)
+    image(img, block_ai.x, block_ai.y, block_ai.width, block_ai.height)
 
     fill('red')
-    rect(user.x, user.y, user.width, user.height)
+    image(hero,user.x, user.y, user.width, user.height)
 
     if (start){
     
@@ -64,10 +76,10 @@ function gameWindow() {
 
 function scoreWindow() {
     textSize(25)
-    background('white')
-    fill('black')
+    image(go,0,0, WIDTH, HEIGHT)
+    fill('white')
     text('GAME OVER - '+winner+" wins", WIDTH / 5, HEIGHT / 2)
-    text('Refresh TO RESTART!!!', 10, 50)
+    text('Refresh TO RESTART!!!', WIDTH / 4, HEIGHT - 40)
 
 }
 
